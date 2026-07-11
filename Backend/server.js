@@ -14,7 +14,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://deeptalk-olive.vercel.app",
+    origin: "https://deeptalk1.netlify.app/",
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -35,7 +35,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://deeptalk-olive.vercel.app",
+    origin: "https://deeptalk1.netlify.app/",
     credentials: true,
   })
 );
