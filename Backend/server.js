@@ -35,7 +35,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://deeptalk-olive.vercel.app/",
+    origin: "https://deeptalk-olive.vercel.app",
     credentials: true,
   })
 );
