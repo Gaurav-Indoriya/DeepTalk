@@ -7,25 +7,27 @@ const web = require('./routes/web');
 
 dotenv.config();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 31098;
 const app = express();
 
 const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://deeptalk.netlify.app",
+    origin: "https://deeptalk-olive.vercel.app",
     methods: ["GET", "POST"],
     credentials: true
   }
 });
 
 const sequelize = require('./database/connectdb');
-sequelize.sync().then(() => {
-  console.log('Database connected successfully.');
-}).catch((error) => {
-  console.error('Unable to connect to the database:', error);
-});
+sequelize.authenticate()
+  .then(() => {
+    console.log("Database connected successfully.");
+  })
+  .catch((error) => {
+    console.error("Database connection failed:", error);
+  });
 
 const bodyParser = require('body-parser');
 
@@ -33,7 +35,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://deeptalk.netlify.app",
+    origin: "https://deeptalk-olive.vercel.app/",
     credentials: true,
   })
 );
