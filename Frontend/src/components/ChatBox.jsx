@@ -7,7 +7,7 @@ import {
   clearChat as clearChatApi
 } from "../services/UserServices";
 
-const ChatBox = ({ selectedUser }) => {
+const ChatBox = ({ selectedUser, onBack }) => {
 
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -187,13 +187,13 @@ const ChatBox = ({ selectedUser }) => {
 
   if (!selectedUser) {
     return (
-      <div className="flex-1 bg-slate-950 flex items-center justify-center">
-        <div className="text-center text-slate-500">
-          <i className="fa-solid fa-comments text-7xl mb-6"></i>
-          <h2 className="text-3xl font-bold text-white">
+      <div className="hidden md:flex flex-1 bg-slate-950 items-center justify-center">
+        <div className="text-center text-slate-500 px-6">
+          <i className="fa-solid fa-comments text-6xl sm:text-7xl mb-6"></i>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">
             Welcome to DeepTalk
           </h2>
-          <p className="mt-3">
+          <p className="mt-3 text-sm sm:text-base">
             Search a user or select a contact to start chatting.
           </p>
         </div>
@@ -202,15 +202,24 @@ const ChatBox = ({ selectedUser }) => {
   }
 
   return (
-    <div className="flex-1 bg-slate-950 flex flex-col">
+    <div className="flex md:flex-1 w-full md:w-auto bg-slate-950 flex-col h-full">
 
       {/* Header */}
-      <div className="bg-slate-900 border-b border-slate-800 px-6 py-4 flex items-center justify-between">
+      <div className="bg-slate-900 border-b border-slate-800 px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
 
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <div className="h-12 w-12 rounded-full bg-slate-800 flex items-center justify-center">
-              <i className="fa-solid fa-user text-blue-500 text-xl"></i>
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          {/* Back button - mobile only */}
+          <button
+            onClick={onBack}
+            className="md:hidden text-slate-300 hover:text-white text-lg p-2 -ml-1 rounded-lg hover:bg-slate-800 transition shrink-0"
+            title="Back"
+          >
+            <i className="fa-solid fa-arrow-left"></i>
+          </button>
+
+          <div className="relative shrink-0">
+            <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-slate-800 flex items-center justify-center">
+              <i className="fa-solid fa-user text-blue-500 text-lg sm:text-xl"></i>
             </div>
             <span
               className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-slate-900 ${
@@ -220,12 +229,12 @@ const ChatBox = ({ selectedUser }) => {
               }`}
             ></span>
           </div>
-          <div>
-            <h2 className="text-xl font-semibold text-white">
+          <div className="min-w-0">
+            <h2 className="text-base sm:text-xl font-semibold text-white truncate">
               {selectedUser.NAME}
             </h2>
             <p
-              className={`text-sm ${
+              className={`text-xs sm:text-sm truncate ${
                 isTyping
                   ? "text-blue-400"
                   : selectedUser?.ONLINE
@@ -250,7 +259,7 @@ const ChatBox = ({ selectedUser }) => {
         </div>
 
         {/* Three-dots menu */}
-        <div className="relative" ref={menuRef}>
+        <div className="relative shrink-0" ref={menuRef}>
           <button
             onClick={() => setShowMenu((prev) => !prev)}
             className="text-slate-400 hover:text-white text-xl cursor-pointer p-2 rounded-lg hover:bg-slate-800 transition"
@@ -277,7 +286,7 @@ const ChatBox = ({ selectedUser }) => {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-2">
+      <div className="flex-1 overflow-y-auto px-3 sm:px-4 py-4 space-y-2">
 
         {messages.length === 0 && !isTyping && (
           <div className="flex items-center justify-center h-full">
@@ -295,13 +304,13 @@ const ChatBox = ({ selectedUser }) => {
             }`}
           >
             <div
-              className={`inline-block max-w-[70%] px-3 py-2 rounded-2xl shadow ${
+              className={`inline-block max-w-[80%] sm:max-w-[70%] px-3 py-2 rounded-2xl shadow ${
                 msg.SENDER_ID === currentUser.ID
                   ? "bg-blue-600 text-white rounded-br-md"
                   : "bg-slate-800 text-white rounded-bl-md"
               }`}
             >
-              <p className="text-[15px] break-words">
+              <p className="text-sm sm:text-[15px] break-words">
                 {msg.MESSAGE}
               </p>
               <div className="flex justify-end items-center gap-1 mt-1">
@@ -340,19 +349,19 @@ const ChatBox = ({ selectedUser }) => {
       </div>
 
       {/* Input */}
-      <div className="bg-slate-900 border-t border-slate-800 p-4">
-        <div className="flex gap-3">
+      <div className="bg-slate-900 border-t border-slate-800 p-3 sm:p-4">
+        <div className="flex gap-2 sm:gap-3">
           <input
             type="text"
             placeholder="Type a message..."
             value={message}
             onChange={handleTyping}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            className="flex-1 bg-slate-800 rounded-xl px-5 py-3 outline-none border border-slate-700 focus:border-blue-500 text-white"
+            className="flex-1 min-w-0 bg-slate-800 rounded-xl px-4 sm:px-5 py-2.5 sm:py-3 outline-none border border-slate-700 focus:border-blue-500 text-white text-sm sm:text-base"
           />
           <button
             onClick={sendMessage}
-            className="bg-blue-600 hover:bg-blue-700 px-6 rounded-xl transition"
+            className="bg-blue-600 hover:bg-blue-700 px-4 sm:px-6 rounded-xl transition shrink-0"
           >
             <i className="fa-solid fa-paper-plane"></i>
           </button>
@@ -361,8 +370,8 @@ const ChatBox = ({ selectedUser }) => {
 
       {/* Clear Chat Confirmation Modal */}
       {showClearModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-sm w-full mx-4 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
             <div className="flex flex-col items-center text-center">
               <div className="h-16 w-16 rounded-full bg-red-600/20 flex items-center justify-center mb-4">
                 <i className="fa-solid fa-trash text-red-500 text-2xl"></i>

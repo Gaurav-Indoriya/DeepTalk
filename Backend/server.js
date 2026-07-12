@@ -7,7 +7,7 @@ const cors = require("cors");
 dotenv.config();
 
 const PORT = process.env.PORT || 31098;
-const FRONTEND_URL = process.env.FRONTEND_URL || "https://deeptalk1.netlify.app";
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
 const app = express();
 const server = http.createServer(app);

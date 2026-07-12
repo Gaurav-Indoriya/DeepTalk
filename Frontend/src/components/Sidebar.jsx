@@ -233,20 +233,20 @@ const Sidebar = ({
 
     return (
 
-        <div className="w-full md:w-80 bg-slate-900 border-r border-slate-800 flex flex-col">
+        <div className={`${selectedUser ? "hidden md:flex" : "flex"} w-full md:w-80 lg:w-96 bg-slate-900 border-r border-slate-800 flex-col h-full`}>
 
             {/* Header */}
 
-            <div className="p-5 border-b border-slate-800">
+            <div className="p-4 sm:p-5 border-b border-slate-800">
 
                 <div className="flex justify-between items-center">
 
                     <div className="flex items-center gap-2">
 
-                        <i className="fa-solid fa-comments text-3xl text-blue-500"></i>
+                        <i className="fa-solid fa-comments text-2xl sm:text-3xl text-blue-500"></i>
 
                         <Link to="/">
-                            <h2 className="text-2xl font-bold text-white">
+                            <h2 className="text-xl sm:text-2xl font-bold text-white">
                                 DeepTalk
                             </h2>
                         </Link>
@@ -255,23 +255,23 @@ const Sidebar = ({
 
                     <button
                         onClick={handleLogout}
-                        className="bg-red-600 hover:bg-red-700 h-10 w-10 rounded-lg"
+                        className="bg-red-600 hover:bg-red-700 h-9 w-9 sm:h-10 sm:w-10 rounded-lg flex items-center justify-center"
                         title="Logout"
                     >
-                        <i className="fa-solid fa-power-off text-white"></i>
+                        <i className="fa-solid fa-power-off text-white text-sm sm:text-base"></i>
                     </button>
 
                 </div>
 
                 {/* Current User */}
 
-                <div className="mt-5 bg-slate-800 rounded-xl p-4 flex items-center gap-3">
+                <div className="mt-4 sm:mt-5 bg-slate-800 rounded-xl p-3 sm:p-4 flex items-center gap-3">
 
                     <div className="relative">
 
-                        <div className="h-12 w-12 rounded-full bg-slate-700 flex items-center justify-center">
+                        <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-slate-700 flex items-center justify-center">
 
-                            <i className="fa-solid fa-user text-blue-500 text-xl"></i>
+                            <i className="fa-solid fa-user text-blue-500 text-lg sm:text-xl"></i>
 
                         </div>
 
@@ -284,13 +284,13 @@ const Sidebar = ({
 
                     </div>
 
-                    <div>
+                    <div className="min-w-0">
 
-                        <h3 className="text-white font-semibold">
+                        <h3 className="text-white font-semibold truncate">
                             {currentUser?.NAME}
                         </h3>
 
-                        <p className="text-slate-400 text-sm">
+                        <p className="text-slate-400 text-sm truncate">
                             @{currentUser?.USERNAME}
                         </p>
 
@@ -302,18 +302,18 @@ const Sidebar = ({
 
             {/* Search */}
 
-            <div className="p-4">
+            <div className="p-3 sm:p-4">
 
                 <div className="relative">
 
-                    <i className="fa-solid fa-search absolute left-4 top-4 text-slate-500"></i>
+                    <i className="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
 
                     <input
                         type="text"
                         placeholder="Search Friend..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full bg-slate-800 rounded-lg py-3 pl-11 pr-4 text-white outline-none border border-slate-700 focus:border-blue-500"
+                        className="w-full bg-slate-800 rounded-lg py-2.5 sm:py-3 pl-11 pr-4 text-white outline-none border border-slate-700 focus:border-blue-500 text-sm sm:text-base"
                     />
 
                 </div>
@@ -324,7 +324,7 @@ const Sidebar = ({
 
             {search && (
 
-                <div className="px-4 mb-4">
+                <div className="px-3 sm:px-4 mb-4">
 
                     <p className="text-slate-400 text-sm mb-2">
                         Search Results
@@ -353,13 +353,13 @@ const Sidebar = ({
                                     className="bg-slate-800 rounded-lg p-3 flex justify-between items-center"
                                 >
 
-                                    <div>
+                                    <div className="min-w-0">
 
-                                        <h3 className="text-white">
+                                        <h3 className="text-white truncate">
                                             {user.NAME}
                                         </h3>
 
-                                        <p className="text-slate-400 text-sm">
+                                        <p className="text-slate-400 text-sm truncate">
                                             @{user.USERNAME}
                                         </p>
 
@@ -369,7 +369,7 @@ const Sidebar = ({
 
                                         <button
                                             onClick={() => handleOpenChat(user)}
-                                            className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded-lg"
+                                            className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded-lg text-sm shrink-0"
                                         >
                                             Chat
                                         </button>
@@ -378,7 +378,7 @@ const Sidebar = ({
 
                                         <button
                                             onClick={() => handleAddContact(user)}
-                                            className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-lg"
+                                            className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-lg text-sm shrink-0"
                                         >
                                             Add
                                         </button>
@@ -399,9 +399,9 @@ const Sidebar = ({
 
             {/* Contacts */}
 
-            <div className="flex-1 overflow-y-auto p-4">
+            <div className="flex-1 overflow-y-auto p-3 sm:p-4">
 
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-3 sm:mb-4">
 
                     <h3 className="text-slate-300 font-semibold">
                         My Contacts
@@ -435,9 +435,9 @@ const Sidebar = ({
                                     className="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded-xl p-3 transition flex justify-between items-center"
                                 >
 
-                                    <div className="flex items-center gap-3">
+                                    <div className="flex items-center gap-3 min-w-0">
 
-                                        <div className="relative">
+                                        <div className="relative shrink-0">
 
                                             <div className="h-10 w-10 rounded-full bg-slate-700 flex items-center justify-center">
 
@@ -454,13 +454,13 @@ const Sidebar = ({
 
                                         </div>
 
-                                        <div>
+                                        <div className="min-w-0">
 
-                                            <h3 className="text-white">
+                                            <h3 className="text-white truncate">
                                                 {user.NAME}
                                             </h3>
 
-                                            <p className="text-slate-400 text-sm">
+                                            <p className="text-slate-400 text-sm truncate">
                                                 @{user.USERNAME}
                                             </p>
 
@@ -468,7 +468,7 @@ const Sidebar = ({
 
                                     </div>
 
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-2 shrink-0">
 
                                         {unreadCounts[user.ID] > 0 && (
 

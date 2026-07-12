@@ -393,6 +393,8 @@ const Register = () => {
                                                 value={formData.username}
                                                 onChange={handleChange}
                                                 placeholder="Username"
+                                                minLength={6}
+                                                required
                                                 className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-12 pr-4 py-3 text-white outline-none focus:border-blue-500"
                                             />
 
@@ -435,6 +437,7 @@ const Register = () => {
                                                 placeholder="Full Name"
                                                 className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-12 pr-4 py-3 text-white outline-none focus:border-blue-500"
                                                 required
+                                                minLength={6}
                                             />
 
                                         </div>
@@ -462,6 +465,7 @@ const Register = () => {
                                                 placeholder="Mobile Number"
                                                 className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-12 pr-4 py-3 text-white outline-none focus:border-blue-500"
                                                 required
+                                                minLength={10}
                                             />
 
                                         </div>
