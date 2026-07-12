@@ -23,8 +23,9 @@ const UserModel = connectdb.define(
         defaultValue: false,
     },
     MOBILE:{
-        type: DataTypes.INTEGER(12),
-        allowNull: false
+        type: DataTypes.STRING(10),
+        allowNull: false,
+        unique: true,
     },
     USRPWD:{
         type: DataTypes.STRING(100),

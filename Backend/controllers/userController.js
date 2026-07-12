@@ -14,6 +14,8 @@ class userController {
             name = name?.trim();
             mobile = mobile?.trim();
 
+            // ================= Required Fields =================
+
             if (!username || !name || !mobile || !password) {
 
                 return res.status(400).json({
@@ -22,6 +24,8 @@ class userController {
                 });
 
             }
+
+            // ================= Username Validation =================
 
             if (!/^[a-zA-Z0-9_]{4,20}$/.test(username)) {
 
@@ -32,6 +36,8 @@ class userController {
 
             }
 
+            // ================= Mobile Validation =================
+
             if (!/^[6-9]\d{9}$/.test(mobile)) {
 
                 return res.status(400).json({
@@ -40,6 +46,8 @@ class userController {
                 });
 
             }
+
+            // ================= Password Validation =================
 
             if (password.length < 6) {
 
@@ -50,22 +58,45 @@ class userController {
 
             }
 
-            const existingUser = await userModel.findOne({
+            // ================= Username Already Exists =================
+
+            const existingUsername = await userModel.findOne({
                 where: {
                     USERNAME: username
                 }
             });
 
-            if (existingUser) {
+            if (existingUsername) {
 
                 return res.status(409).json({
                     success: false,
-                    message: "Username already exists with given username."
+                    message: "Username already exists."
                 });
 
             }
 
+            // ================= Mobile Already Exists =================
+
+            const existingMobile = await userModel.findOne({
+                where: {
+                    MOBILE: mobile
+                }
+            });
+
+            if (existingMobile) {
+
+                return res.status(409).json({
+                    success: false,
+                    message: "Mobile number is already registered."
+                });
+
+            }
+
+            // ================= Password Hash =================
+
             const hashedPassword = await bcrypt.hash(password, 10);
+
+            // ================= Create User =================
 
             await userModel.create({
 
@@ -80,7 +111,7 @@ class userController {
             return res.status(201).json({
 
                 success: true,
-                message: "Registration successful, Please login now"
+                message: "Registration successful. Please login."
 
             });
 

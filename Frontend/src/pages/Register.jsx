@@ -136,7 +136,7 @@ const Register = () => {
 
             });
 
-            navigate("/");
+            navigate("/Login");
 
         } catch (error) {
 
