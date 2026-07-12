@@ -146,7 +146,7 @@ const Home = () => {
 
                                             <h3 className="text-white font-semibold">
 
-                                                Rahul
+                                                Gaurav
 
                                             </h3>
 
@@ -214,7 +214,7 @@ const Home = () => {
 
                                     <div className="text-green-500 text-sm italic">
 
-                                        Rahul is typing...
+                                        Gaurav is typing...
 
                                     </div>
 
