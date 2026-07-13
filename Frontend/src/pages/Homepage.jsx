@@ -180,7 +180,7 @@ const Home = () => {
 
                                         <div className="bg-blue-600 px-4 py-3 rounded-2xl text-white">
 
-                                            Hi Rahul!
+                                            Hi Gaurav.
 
                                         </div>
 
@@ -200,7 +200,7 @@ const Home = () => {
 
                                         <div className="bg-blue-600 px-4 py-3 rounded-2xl text-white">
 
-                                            I'm great 😄
+                                            I'm good 😄
 
                                             <div className="text-xs text-right mt-1">
 
